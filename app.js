@@ -20,10 +20,12 @@ app.use(express.json());
 app.use(company); 
 app.use(employee);
 
+const MongoURL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.vmqwb.mongodb.net/${process.env.MONGO_DATABASE}`;
+const Port = "4000";
 mongoose
-  .connect('mongodb+srv://Prateek487:1234567890@cluster0.vmqwb.mongodb.net/test')
+  .connect(MongoURL)
   .then((result) => {
-    app.listen("4000", () => {
+    app.listen(process.env.PORT || Port, () => {
       console.log("Starting server at port 4000");
     });
   })
